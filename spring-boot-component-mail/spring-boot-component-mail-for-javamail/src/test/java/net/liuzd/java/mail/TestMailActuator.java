@@ -16,6 +16,8 @@ import java.util.List;
 import java.util.Map;
 import java.util.Random;
 
+import javax.mail.MessagingException;
+
 import org.apache.commons.io.IOUtils;
 import org.junit.Assert;
 import org.junit.Test;
@@ -26,7 +28,7 @@ import com.mitchellbosecke.pebble.template.PebbleTemplate;
 
 public class TestMailActuator {
 
-    static String to = "you for mail";
+    static String to = "you email";
 
     @Test
     public void sendText() throws Exception {
@@ -49,7 +51,8 @@ public class TestMailActuator {
     }
 
     private File toFile() throws IOException {
-        InputStream inputStream = TestMailActuator.class.getClassLoader().getResourceAsStream("\\static\\images\\demo.png");
+        InputStream inputStream = TestMailActuator.class.getClassLoader().getResourceAsStream(
+                "\\static\\images\\demo.png");
         File file = new File("src\\test\\resources\\static\\images\\demo_tmp.png");
         file.createNewFile();
         try (OutputStream outputStream = new FileOutputStream(file)) {
@@ -76,13 +79,13 @@ public class TestMailActuator {
     @Test
     public void send() throws Exception {
         MailActuator.init().nickName("测试").attach("test", toFile()).subject("HTML邮件").body(
-                "<h1>您好！</h1>这是Html邮件，来个<font color='red'>红色</font>哟！").to(to).send();;
+                "<h1>您好！</h1>这是Html邮件，来个<font color='red'>红色</font>哟！").to(to).send();
 
         Assert.assertTrue(true);
     }
 
     @Test
-    public void testPebble() throws IOException, PebbleException {
+    public void testPebble() throws IOException, PebbleException, MessagingException {
         PebbleEngine engine = new PebbleEngine.Builder().build();
         // html,pebble 都可以
         PebbleTemplate compiledTemplate = engine.getTemplate("template\\users.pebble");
@@ -101,7 +104,10 @@ public class TestMailActuator {
         Writer writer = new StringWriter();
         compiledTemplate.evaluate(writer, context);
         String output = writer.toString();
-        System.out.println(output);
+        //
+        MailActuator.init().nickName("测试").inlineImage("myImgFile", toFile()).inlineImage("myImgUrl", toURL()).subject(
+                "HTML邮件").body(output).to(to).send();
+        //
         Assert.assertTrue(true);
     }
 

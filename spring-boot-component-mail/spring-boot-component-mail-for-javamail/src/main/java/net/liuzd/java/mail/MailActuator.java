@@ -32,6 +32,16 @@ public class MailActuator {
         return this;
     }
 
+    public MailActuator inlineImage(String contentId, File imageFile) {
+        MailAssist.inlineImage(mailParam, contentId, imageFile);
+        return this;
+    }
+    
+    public MailActuator inlineImage(String contentId, URL url) {
+        MailAssist.inlineImage(mailParam, contentId, url);
+        return this;
+    }
+    
     public MailActuator attach(URL url) {
         return attach(null, url);
     }

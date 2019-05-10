@@ -1,0 +1,12 @@
+Manifest-Version: 1.0
+Implementation-Title: spring-boot-component-mail-for-apache-commons-em
+ ail
+Implementation-Version: 0.0.1-SNAPSHOT
+Built-By: liuzidong
+Implementation-Vendor-Id: com.liuzd.spring.boot.samples
+Build-Jdk: 1.8.0_60
+Implementation-URL: https://projects.spring.io/spring-boot/#/spring-bo
+ ot-starter-parent/spring-boot-component/spring-boot-component-mail/sp
+ ring-boot-component-mail-for-apache-commons-email
+Created-By: Maven Integration for Eclipse
+

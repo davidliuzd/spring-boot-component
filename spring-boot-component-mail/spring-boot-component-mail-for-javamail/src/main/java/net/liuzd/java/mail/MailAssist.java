@@ -112,4 +112,29 @@ public class MailAssist {
         }
     }
 
+    public static BodyPart inlineImage(String contentId, DataHandler dataHandler) throws MessagingException {
+        BodyPart imgPart = new MimeBodyPart();
+        imgPart.setDataHandler(dataHandler);
+        imgPart.setHeader("Content-ID", contentId);
+        imgPart.setDisposition(MimeBodyPart.INLINE);
+        return imgPart;
+    }
+
+    public static void inlineImage(MailParam mailParam, String contentId, File imageFile) {
+        try {
+            FileDataSource fds = new FileDataSource(imageFile);
+            mailParam.getMultipart().addBodyPart(inlineImage(contentId, new DataHandler(fds)));
+        } catch (MessagingException e) {
+            throw new RuntimeException("inlineImage error ..." + contentId, e);
+        }
+    }
+
+    public static void inlineImage(MailParam mailParam, String contentId, URL url) {
+        try {
+            mailParam.getMultipart().addBodyPart(inlineImage(contentId, new DataHandler(url)));
+        } catch (MessagingException e) {
+            throw new RuntimeException("inlineImage error ..." + contentId, e);
+        }
+    }
+
 }
