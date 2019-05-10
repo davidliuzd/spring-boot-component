@@ -18,7 +18,7 @@ mail.smtp.password=
 ##### 3. 其它参见下方 
 
 ###### 邮箱服务器配置
-![](src\main\resources\static\images\sina.mail.config.png)
+![](https://github.com/davidliuzd/spring-boot-component/tree/master/spring-boot-component-mail/spring-boot-component-mail-for-javamail/src/main/resources/static/images\sina.mail.config.png)
 
 ###### 邮箱属性配置明细
 ###### 1. [smtp](https://javaee.github.io/javamail/docs/api/com/sun/mail/smtp/package-summary.html)
@@ -40,7 +40,7 @@ So, you should either use com.sun.mail:javax.mail for compilation and packaging/
 ```
 
 #####  [各版本使用情况](https://mvnrepository.com/search?q=javax.mail)
-![](src\main\resources\static\images\mail-version-use.png)
+![](https://github.com/davidliuzd/spring-boot-component/tree/master/spring-boot-component-mail/spring-boot-component-mail-for-javamail/src/main/resources/static/images\mail-version-use.png)
 
 #####  [Common SMTP port numbers](https://docs.mailpoet.com/article/59-default-ports-numbers-smtp-pop-imap)
 ```
