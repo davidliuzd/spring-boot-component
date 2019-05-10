@@ -1,0 +1,19 @@
+<div>
+	<p>
+		亲爱的<b>{{ username }}</b>, 性别：
+		{% if set == 0 %}
+		    男
+		{% elseif set == 1 %}
+		    女
+		{% else %}
+		    未知
+		{% endif %}
+	</p>	
+	<p>
+		{% for user in users %}
+		    <h3>{{ user.name }}</h3>
+		{% else %}
+		   <p>无数据</p>
+		{% endfor %}
+	</p>	
+</div>

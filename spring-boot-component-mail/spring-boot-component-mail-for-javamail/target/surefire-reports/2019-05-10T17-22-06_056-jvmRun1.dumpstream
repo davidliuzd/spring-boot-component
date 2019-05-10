@@ -1,0 +1,70 @@
+# Created at 2019-05-10T17:22:18.652
+TestSet has not finished before stream error has appeared >> initializing exit by non-null configuration: DEFAULT
+java.io.EOFException
+	at java.io.DataInputStream.readInt(DataInputStream.java:392)
+	at org.apache.maven.surefire.booter.MasterProcessCommand.decode(MasterProcessCommand.java:115)
+	at org.apache.maven.surefire.booter.CommandReader$CommandRunnable.run(CommandReader.java:391)
+	at java.lang.Thread.run(Thread.java:745)
+
+
+# Created at 2019-05-10T17:22:33.048
+Unexpected IOException: 6,1,net.liuzd.java.mail.TestMails,send(net.liuzd.java.mail.TestMails),null,null,null
+
+
+# Created at 2019-05-10T17:22:33.051
+Unexpected IOException: 5,1,net.liuzd.java.mail.TestMails,sendFile(net.liuzd.java.mail.TestMails),null,null,null
+
+
+# Created at 2019-05-10T17:22:44.621
+Unexpected IOException: 6,1,net.liuzd.java.mail.TestMails,sendFile(net.liuzd.java.mail.TestMails),null,null,null
+
+
+# Created at 2019-05-10T17:22:44.623
+Unexpected IOException: 5,1,net.liuzd.java.mail.TestMails,sendHtml(net.liuzd.java.mail.TestMails),null,null,null
+
+
+# Created at 2019-05-10T17:22:45.833
+Unexpected IOException: 6,1,net.liuzd.java.mail.TestMails,sendHtml(net.liuzd.java.mail.TestMails),null,null,null
+
+
+# Created at 2019-05-10T17:22:45.836
+Unexpected IOException: 5,1,net.liuzd.java.mail.TestMails,sendText(net.liuzd.java.mail.TestMails),null,null,null
+
+
+# Created at 2019-05-10T17:22:46.723
+Unexpected IOException: 6,1,net.liuzd.java.mail.TestMails,sendText(net.liuzd.java.mail.TestMails),null,null,null
+
+
+# Created at 2019-05-10T17:22:46.726
+Unexpected IOException: 5,1,net.liuzd.java.mail.TestMails,testPebble(net.liuzd.java.mail.TestMails),null,null,null
+
+
+# Created at 2019-05-10T17:22:46.849
+Unexpected IOException with stream: <div>
+	<p>
+		亲爱的<b>david</b>, 性别：
+				    女
+			</p>	
+	<p>
+				    <h3>张三</h3>
+				    <h3>李四</h3>
+			</p>	
+</div>
+
+
+# Created at 2019-05-10T17:22:46.852
+Unexpected IOException: 6,1,net.liuzd.java.mail.TestMails,testPebble(net.liuzd.java.mail.TestMails),null,null,null
+
+
+# Created at 2019-05-10T17:22:46.854
+Unexpected IOException: 5,1,net.liuzd.java.mail.TestMails,sendUrl(net.liuzd.java.mail.TestMails),null,null,null
+
+
+# Created at 2019-05-10T17:22:49.185
+Unexpected IOException: 6,1,net.liuzd.java.mail.TestMails,sendUrl(net.liuzd.java.mail.TestMails),null,null,null
+
+
+# Created at 2019-05-10T17:22:49.188
+Unexpected IOException: 2,1,org.apache.maven.surefire.junit4.JUnit4Provider,net.liuzd.java.mail.TestMails,null,null,null
+
+
