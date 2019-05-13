@@ -1,11 +1,8 @@
 package net.liuzd.java.mail;
 
 import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
-import java.io.OutputStream;
 import java.io.StringWriter;
 import java.io.Writer;
 import java.net.MalformedURLException;
@@ -16,9 +13,10 @@ import java.util.List;
 import java.util.Map;
 import java.util.Random;
 
+import javax.mail.Message;
 import javax.mail.MessagingException;
+import javax.mail.internet.MimeMessage;
 
-import org.apache.commons.io.IOUtils;
 import org.junit.Assert;
 import org.junit.Test;
 
@@ -28,24 +26,23 @@ import com.mitchellbosecke.pebble.template.PebbleTemplate;
 
 public class TestMailActuator {
 
-    static String to = "you email";
+    static String to = "";
 
     @Test
     public void sendText() throws Exception {
-        MailActuator.init().subject("文本邮件").body("您好！这是纯文本邮件哟！").to(to).send();
+        Actuator.init().subject("文本邮件").body("您好！这是纯文本邮件哟！").to(to).send();
         Assert.assertTrue(true);
     }
 
     @Test
     public void sendHtml() throws Exception {
-        MailActuator.init().subject("HTML邮件").body("<h1>您好！</h1>这是Html邮件，来个<font color='red'>红色</font>哟！").to(to)
-                .send();
+        Actuator.init().subject("HTML邮件").body("<h1>您好！</h1>这是Html邮件，来个<font color='red'>红色</font>哟！").to(to).send();
         Assert.assertTrue(true);
     }
 
     @Test
     public void sendFile() throws Exception {
-        MailActuator.init().attach("我的", toFile()).subject("HTML邮件").body(
+        Actuator.init().attach("我的", toFile()).subject("HTML邮件").body(
                 "<h1>您好！</h1>这是Html邮件，来个<font color='red'>红色</font>哟！").to(to).send();
         Assert.assertTrue(true);
     }
@@ -54,20 +51,13 @@ public class TestMailActuator {
         InputStream inputStream = TestMailActuator.class.getClassLoader().getResourceAsStream(
                 "\\static\\images\\demo.png");
         File file = new File("src\\test\\resources\\static\\images\\demo_tmp.png");
-        file.createNewFile();
-        try (OutputStream outputStream = new FileOutputStream(file)) {
-            IOUtils.copy(inputStream, outputStream);
-        } catch (FileNotFoundException e) {
-            // handle exception here
-        } catch (IOException e) {
-            // handle exception here
-        }
-        return file;
+        //
+        return Assist.copy(inputStream, file);
     }
 
     @Test
     public void sendUrl() throws Exception {
-        MailActuator.init().attach("我的图片", toURL()).subject("HTML邮件").body(
+        Actuator.init().attach("我的图片", toURL()).subject("HTML邮件").body(
                 "<h1>您好！</h1>这是Html邮件，来个<font color='red'>红色</font>哟！").to(to).send();
         Assert.assertTrue(true);
     }
@@ -78,7 +68,7 @@ public class TestMailActuator {
 
     @Test
     public void send() throws Exception {
-        MailActuator.init().nickName("测试").attach("test", toFile()).subject("HTML邮件").body(
+        Actuator.init().nickName("测试").attach("test.png", toFile()).subject("HTML邮件").body(
                 "<h1>您好！</h1>这是Html邮件，来个<font color='red'>红色</font>哟！").to(to).send();
 
         Assert.assertTrue(true);
@@ -105,7 +95,7 @@ public class TestMailActuator {
         compiledTemplate.evaluate(writer, context);
         String output = writer.toString();
         //
-        MailActuator.init().nickName("测试").inlineImage("myImgFile", toFile()).inlineImage("myImgUrl", toURL()).subject(
+        Actuator.init().nickName("测试").inlineImage("myImgFile", toFile()).inlineImage("myImgUrl", toURL()).subject(
                 "HTML邮件").body(output).to(to).send();
         //
         Assert.assertTrue(true);
@@ -125,7 +115,36 @@ public class TestMailActuator {
         public void setName(String name) {
             this.name = name;
         }
+    }
 
+    @Test
+    public void mesageCounts() throws Exception {
+        int unreadMessageCount = Actuator.init().getUnreadMessageCount();
+        int deletedMessageCount = Actuator.init().getDeletedMessageCount();
+        int newMessageCount = Actuator.init().getNewMessageCount();
+        int messageCount = Actuator.init().getMessageCount();
+        System.out.println(String.format("unreadMessageCount : %d ,deletedMessageCount : %d,newMessageCount : %d , "
+                + "messageCount : %d", unreadMessageCount, deletedMessageCount, newMessageCount, messageCount));
+        Assert.assertTrue(true);
+    }
+
+    @Test
+    public void mesages() throws Exception {
+        Message[] messages = Actuator.init().readMailFrom(90).search();
+        for (Message message : messages) {
+            MimeMessage msg = (MimeMessage) message;
+            System.out.println("解析第" + msg.getMessageNumber() + "封邮件");
+            System.out.println("主题: " + Assist.getSubject(msg));
+            System.out.println("发件人: " + Assist.getFrom(msg));
+            System.out.println("收件人：" + Assist.getReceiveAddress(msg, null));
+            System.out.println("发送时间：" + Assist.getSentDate(msg, null));
+            System.out.println("是否已读：" + Assist.isSeen(msg));
+            System.out.println("邮件优先级：" + Assist.getPriority(msg));
+            System.out.println("是否需要回执：" + Assist.isReplySign(msg));
+            System.out.println("大小：" + msg.getSize() * 1024 + "kb");
+            System.out.println("类型：" + msg.getContentType());
+        }
+        Assert.assertTrue(true);
     }
 
 }

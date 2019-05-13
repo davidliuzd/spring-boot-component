@@ -6,7 +6,7 @@ import javax.mail.internet.MimeMultipart;
 import lombok.Data;
 
 @Data
-public class MailParam {
+public class SMTPParam {
     
     /**
      * 发送名称

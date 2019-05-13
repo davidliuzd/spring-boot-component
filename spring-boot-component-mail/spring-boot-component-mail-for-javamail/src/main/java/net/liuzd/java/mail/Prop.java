@@ -7,23 +7,26 @@ import java.util.Properties;
 
 import com.sun.mail.util.MailSSLSocketFactory;
 
-public class MailProp {
+public class Prop {
 
     private static Properties   P;
     //
-    private static final String MAIL_P             = "mail.properties";
-    private static final String MAIL_SMTP_HOST     = "mail.smtp.host";
-    private static final String MAIL_SMTP_PORT     = "mail.smtp.port";
-    private static final String MAIL_USER_ACCOUT   = "mail.smtp.user";
-    private static final String MAIL_USER_PWD      = "mail.smtp.password";
-    private static final String MAIL_USER_FROM     = "mail.smtp.from";
-    private static final String MAIL_SSL_SF        = "mail.smtp.ssl.socketFactory";
-    private static final String MAIL_SESSION_DEBUG = "mail.session.debug";
+    private static final String MAIL_P              = "mail.properties";
+    private static final String MAIL_SMTP_HOST      = "mail.smtp.host";
+    private static final String MAIL_SMTP_PORT      = "mail.smtp.port";
+    private static final String MAIL_USER_ACCOUT    = "mail.smtp.user";
+    private static final String MAIL_USER_PWD       = "mail.smtp.password";
+    private static final String MAIL_USER_FROM      = "mail.smtp.from";
+    private static final String MAIL_SSL_SF         = "mail.smtp.ssl.socketFactory";
+    private static final String MAIL_SESSION_DEBUG  = "mail.session.debug";
+    private static final String MAIL_STORE_PROTOCOL = "mail.store.protocol";
+    private static final String MAIL_POP3_HOST      = "mail.pop3.host";
+    private static final String MAIL_POP3_PORT      = "mail.pop3.port";
 
     //
     public static synchronized Properties get() {
         if (null == P) {
-            P = init(MailProp.class.getClassLoader().getResourceAsStream(MAIL_P));
+            P = init(Prop.class.getClassLoader().getResourceAsStream(MAIL_P));
             revised(P);
         }
         return P;
@@ -38,27 +41,43 @@ public class MailProp {
             }
         });
         //
-        if (prop.containsKey(MAIL_SSL_SF)) {
-            try {
-                MailSSLSocketFactory sf = new MailSSLSocketFactory();
-                sf.setTrustAllHosts(true);
-                prop.put(MAIL_SSL_SF, sf);
-            } catch (GeneralSecurityException e) {
-                throw new RuntimeException("GeneralSecurityException for MailSSLSocketFactory ...", e);
-            }
+        try {
+            MailSSLSocketFactory sf = new MailSSLSocketFactory();
+            sf.setTrustAllHosts(true);
+            prop.put(MAIL_SSL_SF, sf);
+        } catch (GeneralSecurityException e) {
+            throw new RuntimeException("GeneralSecurityException for MailSSLSocketFactory ...", e);
         }
+        //
     }
 
     public static Properties init(InputStream is) {
         //
         Properties prop = System.getProperties();
+
         try {
+
             prop.load(is);
+
         } catch (IOException e) {
+
             throw new RuntimeException("no find file  error ...", e);
+
         }
         //
         return prop;
+    }
+
+    public static String getProtocol() {
+        return get().getProperty(MAIL_STORE_PROTOCOL);
+    }
+
+    public static int getPop3Port() {
+        return Integer.parseInt(get().getProperty(MAIL_POP3_PORT));
+    }
+
+    public static String getPop3Host() {
+        return get().getProperty(MAIL_POP3_HOST);
     }
 
     public static String getSmtpHost() {
