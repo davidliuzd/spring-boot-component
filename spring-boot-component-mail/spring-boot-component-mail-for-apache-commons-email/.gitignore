@@ -28,5 +28,3 @@ HELP.md
 ### VS Code ###
 .vscode/
 /spring-boot-component-mail/target
-/spring-boot-component-mail/spring-boot-component-mail-for-javamail/target
-/spring-boot-component-mail/spring-boot-component-mail-for-apache-commons-email/target
