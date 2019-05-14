@@ -16,7 +16,7 @@ import org.junit.Test;
 
 public class TestMailActuator {
 
-    static String to = "davidliuzd@sina.com";
+    static String to = "";
 
     private File toFile() throws IOException {
         InputStream is = TestMailActuator.class.getClassLoader().getResourceAsStream("\\static\\images\\demo.png");
