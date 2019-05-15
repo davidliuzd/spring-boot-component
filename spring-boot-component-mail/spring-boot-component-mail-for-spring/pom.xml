@@ -1,0 +1,126 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<parent>
+		<groupId>com.liuzd.spring.boot.samples</groupId>
+		<artifactId>spring-boot-component-mail</artifactId>
+		<version>0.0.1-SNAPSHOT</version>
+	</parent>
+	<artifactId>spring-boot-component-mail-for-spring</artifactId>
+	<packaging>war</packaging>
+
+	<properties>
+		 <java-version>1.8</java-version>
+		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+		<maven.compiler.source>1.8</maven.compiler.source>
+		<maven.compiler.target>1.8</maven.compiler.target>
+   </properties>
+
+	<dependencies>
+	
+		<!-- 
+			https://github.com/spring-projects/spring-framework
+			http://ifeve.com/spring-5-email/
+		-->		
+		
+		<dependency>
+            <groupId>org.freemarker</groupId>
+            <artifactId>freemarker</artifactId>
+           <!--  <version>${freemarker.version}</version> -->
+        </dependency>
+		
+
+		<!-- https://mvnrepository.com/artifact/org.springframework/spring-context -->
+		<!-- 普通java工程使用spring框架，只需这一个：spring的context上下文即IoC容器 -->
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-context</artifactId>
+			<scope>runtime</scope>
+			<exclusions>
+		        <exclusion>
+		            <groupId>commons-logging</groupId>
+		            <artifactId>commons-logging</artifactId>
+		        </exclusion>
+		    </exclusions>
+		</dependency>		
+		
+		<!-- 依赖注入IoC与DI的最基本实现 -->
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-core</artifactId>
+		</dependency>
+		
+		<!-- Bean工厂与bean的装配 -->
+		 <dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-beans</artifactId>
+		</dependency>
+		
+		<dependency>
+			<groupId>com.sun.mail</groupId>
+			<artifactId>javax.mail</artifactId>
+			<!-- <version>1.6.2</version> -->
+		</dependency>
+		
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-context-support</artifactId>
+		</dependency>
+		
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-test</artifactId>
+			<scope>test</scope>
+		</dependency>
+		<dependency>
+			<groupId>junit</groupId>
+			<artifactId>junit</artifactId>
+			<!-- <version>4.12</version> -->
+			<scope>test</scope>
+		</dependency>
+		
+		<!-- 
+		core部分包含4个模块
+		spring-core：依赖注入IoC与DI的最基本实现
+		spring-beans：Bean工厂与bean的装配
+		spring-context：spring的context上下文即IoC容器
+		spring-expression：spring表达式语言
+		aop部分包含4个模块
+		spring-aop：面向切面编程
+		spring-aspects：集成AspectJ
+		spring-instrument：提供一些类级的工具支持和ClassLoader级的实现，用于服务器
+		spring-instrument-tomcat：针对tomcat的instrument实现
+		data access部分包含5个模块
+		spring-jdbc：jdbc的支持
+		spring-tx：事务控制
+		spring-orm：对象关系映射，集成orm框架
+		spring-oxm：对象xml映射
+		spring-jms：java消息服务
+		web部分包含4个模块
+		spring-web：基础web功能，如文件上传
+		spring-webmvc：mvc实现
+		spring-webmvc-portlet：基于portlet的mvc实现
+		spring-struts：与struts的集成，不推荐，spring4不再提供
+		test部分只有一个模块
+		spring-test：spring测试，提供junit与mock测试功能
+		spring-context-support：spring额外支持包，比如邮件服务、视图解析等
+		 -->		 
+		 
+		 <!-- https://mvnrepository.com/artifact/org.slf4j/slf4j-api -->
+		<dependency>
+			<groupId>org.slf4j</groupId>
+			<artifactId>slf4j-api</artifactId>
+			<!-- <version>1.7.26</version> -->
+		</dependency>		
+		
+		<dependency>
+			<groupId>commons-io</groupId>
+			<artifactId>commons-io</artifactId>
+			<version>2.6</version>
+		</dependency> 		
+		 
+	</dependencies>
+	
+
+</project>

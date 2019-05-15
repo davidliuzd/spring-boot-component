@@ -14,5 +14,6 @@
 		<module>
   		spring-boot-component-mail-for-apache-commons-email
   	</module>
+		<module>spring-boot-component-mail-for-spring</module>
 	</modules>
 </project>

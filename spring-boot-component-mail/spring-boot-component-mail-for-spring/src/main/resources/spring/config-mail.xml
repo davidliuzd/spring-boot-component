@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:mvc="http://www.springframework.org/schema/mvc"
+	xmlns:aop="http://www.springframework.org/schema/aop"
+	xmlns:util="http://www.springframework.org/schema/util"
+	xsi:schemaLocation="
+	    http://www.springframework.org/schema/beans
+        http://www.springframework.org/schema/beans/spring-beans.xsd
+        http://www.springframework.org/schema/context
+        http://www.springframework.org/schema/context/spring-context.xsd
+        http://www.springframework.org/schema/aop  
+     	http://www.springframework.org/schema/aop/spring-aop.xsd
+     	http://www.springframework.org/schema/util
+     	http://www.springframework.org/schema/util/spring-util.xsd
+        http://www.springframework.org/schema/mvc
+        http://www.springframework.org/schema/mvc/spring-mvc.xsd"
+	default-autowire="byName">	
+	
+	<!--email的配置 -->
+	<bean id="mailSender"
+		class="org.springframework.mail.javamail.JavaMailSenderImpl">
+		<property name="host" value="${mail.smtp.host}" />
+		<property name="username" value="${mail.smtp.user}" />
+		<property name="password" value="${mail.smtp.password}" />
+		<property name="defaultEncoding" value="UTF-8"/>
+		<property name="javaMailProperties">
+			<props>
+				<prop key="mail.smtp.auth">${mail.smtp.auth}</prop>
+				<prop key="mail.from">${mail.smtp.user}</prop>
+				<prop key="mail.transport.protocol">smtps</prop>
+			</props>
+		</property>
+	</bean>
+	
+	<!-- 
+        网易的SMTP服务器名和端口号:
+        网易邮箱          SMTP服务器     SMTP端口     POP3服务器       POP3端口
+        @126.com     smtp.126.com      25          pop3.126.com      110
+        @163.com     smtp.163.com      25          pop3.163.com      110
+        @yeah.net    smtp.yeah.net      25          pop3.yeah.net     110
+    -->        
+
+</beans>
